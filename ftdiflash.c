@@ -124,20 +124,22 @@ void xfer_spi(uint8_t *data, int n)
 void set_gpio(int slavesel_b, int creset_b)
 {
 	uint8_t gpio = 1;
+	
+	gpio |= 0x40 /* HOLD */ /* creset_b == 0x10 */;
 
 	if (slavesel_b) {
 		// ADBUS4 (GPIOL0)
-		gpio |= 0x10;
+		gpio |= 0x08;
 	}
 
-	if (creset_b) {
+	if (!creset_b) {
 		// ADBUS7 (GPIOL3)
-		gpio |= 0x80;
+		gpio |= 0x10;
 	}
 
 	send_byte(0x80);
 	send_byte(gpio);
-	send_byte(0x93);
+	send_byte(0x01 | 0x02 | 0x08 | 0x10);
 }
 
 void flash_read_id()
@@ -410,8 +412,8 @@ int main(int argc, char **argv)
 			error();
 		}
 	} else {
-		if (ftdi_usb_open(&ftdic, 0x0403, 0x6014)) {
-			fprintf(stderr, "Can't find FTDI FT232H USB device (vedor_id 0x0403, device_id 0x6014).\n");
+		if (ftdi_usb_open(&ftdic, 0x0403, 0x6010)) {
+			fprintf(stderr, "Can't find FTDI FT232H USB device (vedor_id 0x0403, device_id 0x6010).\n");
 			error();
 		}
 	}
@@ -454,7 +456,7 @@ int main(int argc, char **argv)
 	send_byte(0x00);
 	send_byte(0x00);
 
-	set_gpio(1, 1);
+	set_gpio(1, 0);
 	usleep(100000);
 
 
@@ -471,7 +473,7 @@ int main(int argc, char **argv)
 
 		flash_power_down();
 
-		set_gpio(1, 1);
+		set_gpio(1, 0);
 		usleep(250000);
 	}
 	else
