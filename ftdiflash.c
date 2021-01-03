@@ -1,9 +1,10 @@
 /*
  *	ftdiflash
- *  modified version of iceprog -- simple programming tool for FTDI-based Lattice iCE programmers
+ *  modified version of iceprog that now programs attached SPI flash on Efinix eval kits
  *
  *  Copyright (C) 2015  Clifford Wolf <clifford@clifford.at>
  *	Modified 2017 Dean Miller <dean@adafruit.com>
+ *      Modified 2020 Joshua Wise <joshua@accelerated.tech>
  *  
  *  Permission to use, copy, modify, and/or distribute this software for any
  *  purpose with or without fee is hereby granted, provided that the above
