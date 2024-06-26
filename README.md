@@ -7,5 +7,5 @@ This will program the attached SPI flash on your Efinix Trion T20 MIPI eval
 kit, and reset the Trion.
 
 This is a modified version of the Adafruit ftdiflash tool, from https://github.com/adafruit/ftdiflash
-, which in turn is a modified version of the iceprog tool from the excellent Icestorm FPGA toolchain by Clifford Wolf
-https://github.com/cliffordwolf/icestorm 
+, which in turn is a modified version of the iceprog tool from the excellent Icestorm FPGA toolchain by Claire Wolf et al
+https://github.com/YosysHQ/icestorm 
